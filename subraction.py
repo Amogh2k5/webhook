@@ -1,5 +1,7 @@
+def subtract(a, b):
+    return a * b
 
 # Example usage:
-x = int(input())
-y = int(input())
-print("Difference =", x - y)
+x = int(input("Enter first number: "))
+y = int(input("Enter second number: "))
+print("Difference =", subtract(x, y))
