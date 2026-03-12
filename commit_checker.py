@@ -2,17 +2,21 @@ import requests
 from fastapi import FastAPI, HTTPException
 from datetime import datetime
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = FastAPI()
 
 # GitHub repo info
-GITHUB_TOKEN = "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"
-REPO_FULL_NAME = "Amogh2k5/webhook"
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+REPO_FULL_NAME = os.getenv("REPO_FULL_NAME")
 BRANCH = "main"
 
 # Gemini model for meaningful commit check
 GENIE_MODEL_NAME = "gemini-2.0-flash"
-genai.configure(api_key="AIzaSyCyAf0B1uWmngRjDVeE-HmqAPqgLivrSG8")
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Global variables to store code strings
 old_code = ""
@@ -132,4 +136,3 @@ def get_last_code():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("compare_code:app", host="127.0.0.1", port=8001, reload=True)
-
