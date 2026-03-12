@@ -1,6 +1,6 @@
 """
 FastAPI GitHub Repository Q&A with RAG
-pip install PyGithub google-generativeai chromadb sentence-transformers fastapi uvicorn
+pip install PyGithub google-generativeai chromadb sentence-transformers fastapi uvicorn python-dotenv
 """
 
 import base64
@@ -13,11 +13,15 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 import uvicorn
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Configuration
-GITHUB_TOKEN = "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"
-GEMINI_API_KEY = "AIzaSyCyAf0B1uWmngRjDVeE-HmqAPqgLivrSG8"
-REPO_NAME = "adityaatre26/Cokaam"
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+REPO_NAME = os.getenv("REPO_NAME")
 
 class GitHubQA:
     def __init__(self, github_token: str, gemini_key: str):
